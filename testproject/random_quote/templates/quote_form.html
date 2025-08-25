@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Добавить цитату{% endblock %}
+{% block content %}
+<h1>Добавить цитату</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Сохранить</button>
+</form>
+{% if form.errors %}
+  <pre style="color:red">{{ form.errors }}</pre>
+{% endif %}
+{% endblock %}

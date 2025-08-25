@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Случайная цитата{% endblock %}
+{% block content %}
+<h1>Случайная цитата</h1>
+
+  {% if quote %}
+    <h3 style="font-size:1.2rem">{{ quote.quote_text }}</h3>
+    <p>Источник: {{ quote.source }} (тип: {{ quote.source_type }})</p>
+    <p>Просмотры: {{ quote.watches }} | Лайки: {{ quote.likes }} | Дизлайки: {{ quote.dislikes }}</p>
+
+    <form method="post" action="{% url 'quote_like' quote.pk %}" style="display:inline">
+      {% csrf_token %}
+      <button type="submit">👍 Лайк</button>
+    </form>
+
+    <form method="post" action="{% url 'quote_dislike' quote.pk %}" style="display:inline">
+      {% csrf_token %}
+      <button type="submit">👎 Дизлайк</button>
+    </form>
+  {% else %}
+    <p>Пока нет цитат. <a href="{% url 'quote_add' %}">Добавьте первую</a>.</p>
+  {% endif %}
+
+{% endblock %}

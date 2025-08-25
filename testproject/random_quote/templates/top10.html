@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Топ-10 по лайкам{% endblock %}
+{% block content %}
+<h1>Топ-10 популярных цитат</h1>
+<ol>
+  {% for q in quotes %}
+    <li>
+      <h3>{{ q.quote_text }}</h3>
+      <div>
+        Источник: {{ q.source }} |
+        Лайки: {{ q.likes }} |
+        Просмотры: {{ q.watches }} |
+        Вес: {{ q.weight }}
+      </div>
+    </li>
+  {% empty %}
+    <li>Ещё нет данных.</li>
+  {% endfor %}
+</ol>
+{% endblock %}
