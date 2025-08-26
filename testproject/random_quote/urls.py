@@ -5,6 +5,8 @@ from .views import (
     like_quote,
     dislike_quote,
     Top10ByLikesView,
+    dashboard_view,
+    quotes_by_source_view
 )
 
 urlpatterns = [
@@ -13,4 +15,5 @@ urlpatterns = [
     path("quotes/<int:pk>/like/", like_quote, name="quote_like"),
     path("quotes/<int:pk>/dislike/", dislike_quote, name="quote_dislike"),
     path("quotes/top/", Top10ByLikesView.as_view(), name="quotes_top"),
+    path("quotes/dashboard/", dashboard_view, name="dashboard")
 ]

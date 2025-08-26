@@ -6,7 +6,7 @@
   {% if quote %}
     <h3 style="font-size:1.2rem">{{ quote.quote_text }}</h3>
     <p>Источник: {{ quote.source }} (тип: {{ quote.source_type }})</p>
-    <p>Просмотры: {{ quote.watches }} | Лайки: {{ quote.likes }} | Дизлайки: {{ quote.dislikes }}</p>
+    <p>Просмотры: {{ quote.watches }} | 👍: {{ quote.likes }} | 👎: {{ quote.dislikes }}</p>
 
     <form method="post" action="{% url 'quote_like' quote.pk %}" style="display:inline">
       {% csrf_token %}

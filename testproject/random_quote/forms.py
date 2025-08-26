@@ -12,8 +12,17 @@ class QuoteForm(forms.ModelForm):
         qt = (cleaned.get("quote_text") or "").strip()
         source = (cleaned.get("source") or "").strip()
 
-        if not qt or not source:
-            return cleaned
+        if not qt:
+            raise ValidationError("Текст цитаты не может быть пустым.")
+
+        if not source:
+            raise ValidationError("Источник не может быть пустым.")
+
+        if len(qt) < 10:
+            raise ValidationError("Цитата должна содержать минимум 10 символов.")
+
+        if len(source) < 2:
+            raise ValidationError("Название источника должно содержать минимум 2 символа.")
 
         if Quote.objects.filter(quote_text__iexact=qt, source__iexact=source).exists():
             raise ValidationError("Такая цитата уже существует.")

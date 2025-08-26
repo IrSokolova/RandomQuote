@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="398d4524-d5ad-4208-ac2e-e3454257db68" name="Changes" comment="fix: Изменение редиректа при лайке и дизлайке">
+    <list default="true" id="398d4524-d5ad-4208-ac2e-e3454257db68" name="Changes" comment="feature: Лайки и дизлайки влияют на вес цитаты">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testproject/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testproject/random_quote/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testproject/random_quote/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testproject/random_quote/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testproject/random_quote/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testproject/random_quote/templates/random.html" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/templates/random.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testproject/random_quote/templates/top10.html" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/templates/top10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testproject/random_quote/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testproject/random_quote/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testproject/testproject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/testproject/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,12 +96,21 @@
       <option name="project" value="LOCAL" />
       <updated>1756192535543</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feature: Лайки и дизлайки влияют на вес цитаты">
+      <option name="closed" value="true" />
+      <created>1756199906173</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1756199906173</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feature: Добавление цитаты с валидацией по уникальности текста, по количеству цитат на один источник и неотрицательности веса &#10;feature: Отображение случайной цитаты с учетом веса&#10;feature: Возможность поставить лайк или дизлайк цитате&#10;feature: Отображение 10 самых популярных цитат&#10;feature: Счетчик просмотров&#10;feature: Добавление поля &quot;тип источника&quot;" />
     <MESSAGE value="fix: Изменение редиректа при лайке и дизлайке" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: Изменение редиректа при лайке и дизлайке" />
+    <MESSAGE value="feature: Лайки и дизлайки влияют на вес цитаты" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature: Лайки и дизлайки влияют на вес цитаты" />
   </component>
 </project>

@@ -6,11 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-  <nav>
-    <a href="{% url 'random_quote' %}">Случайная цитата</a> |
-    <a href="{% url 'quote_add' %}">Добавить цитату</a> |
-    <a href="{% url 'quotes_top' %}">Топ-10</a>
-  </nav>
+    <nav>
+                <a href="{% url 'random_quote' %}">🎲 Случайная цитата</a> |
+                <a href="{% url 'quote_add' %}">➕ Добавить цитату</a> |
+                <a href="{% url 'quotes_top' %}">🏆 Топ-10</a> |
+                <a href="{% url 'dashboard' %}">📊 Дашборд</a> |
+    </nav>
   <hr />
   {% block content %}{% endblock %}
 </body>

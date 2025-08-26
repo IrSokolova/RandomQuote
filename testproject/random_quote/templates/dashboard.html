@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Дашборд - Статистика цитат{% endblock %}
+{% block content %}
+<h1>📊 Дашборд</h1>
+
+<!-- Общая статистика -->
+<h2>Общая статистика</h2>
+<ul>
+    <li><strong>Всего цитат:</strong> {{ stats.total_quotes }}</li>
+    <li><strong>Всего просмотров:</strong> {{ stats.total_views }}</li>
+    <li><strong>Всего лайков:</strong> {{ stats.total_likes }}</li>
+    <li><strong>Всего дизлайков:</strong> {{ stats.total_dislikes }}</li>
+    <li><strong>Средний вес:</strong> {{ stats.avg_weight|floatformat:1 }}</li>
+</ul>
+
+<!-- Статистика по типам источников -->
+<h2>📖 Статистика по типам источников</h2>
+{% if source_stats %}
+<table border="1" style="border-collapse: collapse; width: 100%; margin-bottom: 20px">
+    <thead>
+        <tr>
+            <th style="padding: 8px">Тип источника</th>
+            <th style="padding: 8px">Количество цитат</th>
+            <th style="padding: 8px">Лайки</th>
+            <th style="padding: 8px">Просмотры</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in source_stats %}
+        <tr>
+            <td style="padding: 8px; text-align: center">{{ stat.source_type }}</td>
+            <td style="padding: 8px; text-align: center">{{ stat.count }}</td>
+            <td style="padding: 8px; text-align: center">{{ stat.total_likes }}</td>
+            <td style="padding: 8px; text-align: center">{{ stat.total_views }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Нет данных для отображения</p>
+{% endif %}
+
+<!-- Топ источники -->
+<h2>🏆 Топ-5 источников по лайкам</h2>
+{% if top_sources %}
+<ol>
+    {% for source in top_sources %}
+    <li><strong>{{ source.source }}</strong> - {{ source.total_likes }} лайков, {{ source.count }} цитат</li>
+    {% endfor %}
+</ol>
+{% else %}
+<p>Нет данных для отображения</p>
+{% endif %}
+
+<!-- Последние цитаты -->
+<h2>🕒 Последние добавленные цитаты</h2>
+{% if recent_quotes %} {% for quote in recent_quotes %}
+<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px">
+    <p><em>"{{ quote.get_short_text }}"</em></p>
+    <p><strong>Источник:</strong> {{ quote.source }}</p>
+    <p>
+        👍 {{ quote.likes }} | 👎 {{ quote.dislikes }} | 👁️ {{ quote.watches }} {% if quote.created_at %} | Добавлено:
+        {{ quote.created_at|date:"d.m.Y H:i" }} {% endif %}
+    </p>
+</div>
+{% endfor %} {% else %}
+<p>Нет добавленных цитат</p>
+{% endif %}
+
+<!-- Навигация -->
+<hr />
+<p>
+    <a href="{% url 'random_quote' %}">🎲 К цитатам</a> | <a href="{% url 'quote_add' %}">➕ Добавить цитату</a> |
+    <a href="{% url 'quotes_top' %}">🏆 Топ-10</a>
+</p>
+{% endblock %}
