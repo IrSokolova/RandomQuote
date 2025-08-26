@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="398d4524-d5ad-4208-ac2e-e3454257db68" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/Тестовое.iml" afterDir="false" />
+    <list default="true" id="398d4524-d5ad-4208-ac2e-e3454257db68" name="Changes" comment="fix: Изменение редиректа при лайке и дизлайке">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testproject/random_quote/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/forms.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +24,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;IrSokolova&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/IrSokolova/-.git&quot;,
+    &quot;accountId&quot;: &quot;a7d3d2e8-ab83-4f94-b1bb-de73380c0e9b&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -37,16 +45,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.models.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/irina/PycharmProjects/Тестовое",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.models.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/irina/PycharmProjects/Тестовое&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -63,6 +71,28 @@
       <option name="presentableId" value="Default" />
       <updated>1756111020439</updated>
     </task>
+    <task id="LOCAL-00001" summary="feature: Добавление цитаты с валидацией по уникальности текста, по количеству цитат на один источник и неотрицательности веса &#10;feature: Отображение случайной цитаты с учетом веса&#10;feature: Возможность поставить лайк или дизлайк цитате&#10;feature: Отображение 10 самых популярных цитат&#10;feature: Счетчик просмотров&#10;feature: Добавление поля &quot;тип источника&quot;">
+      <option name="closed" value="true" />
+      <created>1756126207508</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1756126207508</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix: Изменение редиректа при лайке и дизлайке">
+      <option name="closed" value="true" />
+      <created>1756192535543</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1756192535543</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feature: Добавление цитаты с валидацией по уникальности текста, по количеству цитат на один источник и неотрицательности веса &#10;feature: Отображение случайной цитаты с учетом веса&#10;feature: Возможность поставить лайк или дизлайк цитате&#10;feature: Отображение 10 самых популярных цитат&#10;feature: Счетчик просмотров&#10;feature: Добавление поля &quot;тип источника&quot;" />
+    <MESSAGE value="fix: Изменение редиректа при лайке и дизлайке" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: Изменение редиректа при лайке и дизлайке" />
   </component>
 </project>
