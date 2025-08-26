@@ -34,13 +34,13 @@ def random_quote_view(request):
 @require_POST
 def like_quote(request, pk: int):
     Quote.objects.filter(pk=pk).update(likes=F("likes") + 1)
-    return redirect(request.META.get("HTTP_REFERER", reverse("random_quote")))
+    return redirect(random_quote_view)
 
 
 @require_POST
 def dislike_quote(request, pk: int):
     Quote.objects.filter(pk=pk).update(dislikes=F("dislikes") + 1)
-    return redirect(request.META.get("HTTP_REFERER", reverse("random_quote")))
+    return redirect(random_quote_view)
 
 
 class Top10ByLikesView(ListView):
