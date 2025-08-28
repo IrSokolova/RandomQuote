@@ -1,11 +1,11 @@
 <!-- PROJECT LOGO -->
-<br />
 <div align="center">
   <a href="https://github.com/IrSokolova/RandomQuote">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="logo.png" alt="Logo" width="80" height="80">
   </a>
+</div>
 
-  <h3 align="center">Генератор случайных цитат</h3>
+<h2 align="center">Генератор случайных цитат</h2>
 
 
 <!-- TABLE OF CONTENTS -->
