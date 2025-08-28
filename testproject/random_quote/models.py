@@ -2,6 +2,25 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 class Quote(models.Model):
+    """Модель цитаты.
+
+        Хранит сам текст цитаты, источник и категорию источника (фильм/книга/сериал/человек),
+        а также числовые метрики (вес, просмотры, лайки/дизлайки). Используется для
+        подбора и отображения цитат в интерфейсе и аналитике.
+
+        Основные поля:
+            - quote_text (TextField): текст цитаты.
+            - source (CharField): человекочитаемый источник (название фильма/книги/сериала или имя).
+            - source_type (CharField, choices): тип источника (Ф/К/С/Ч) с отображаемыми названиями.
+            - weight (IntegerField): «вес» цитаты, влияет на частоту показа.
+            - watches/likes/dislikes (IntegerField): метрики вовлечённости.
+            - created_at/updated_at (DateTimeField): системные временные метки.
+
+        Примечания:
+            - Для экземпляра модели `quote.get_source_type_display()` вернёт локализованную
+              метку типа источника согласно `SOURCE_CHOICES`.
+            - Сортировка по умолчанию — по популярности: лайки ↓, вес ↓, просмотры ↓.
+        """
     MOVIE = "Ф"
     BOOK = "К"
     SERIES = "С"
@@ -30,10 +49,19 @@ class Quote(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    """Строковое представление модели — возвращает текст цитаты."""
     def __str__(self):
         return self.quote_text
 
     class Meta:
+        """Метаданные модели.
+
+           ordering:
+               Сортировка по умолчанию на списках: сначала по количеству лайков (убыв.),
+               затем по весу (убыв.), затем по просмотрам (убыв.).
+
+           indexes:
+               Индексы для ускорения выборок/агрегаций по полям weight, likes и source."""
         ordering = ['-likes', '-weight', '-watches']
         indexes = [
             models.Index(fields=['weight']),
@@ -48,18 +76,33 @@ class Quote(models.Model):
 
     @property
     def like_percentage(self):
-        """Процент лайков от всех реакций"""
+        """
+        Доля лайков среди всех реакций в процентах, округлённая до 0.1.
+        Возвращает 0, если реакций нет (деление на ноль предотвращено).
+        """
         if self.total_reactions == 0:
             return 0
         return round((self.likes / self.total_reactions) * 100, 1)
 
     @property
     def popularity_score(self):
-        """Комплексный показатель популярности"""
+        """
+        Комплексный показатель популярности
+        Формула:
+            (likes * 3) + (watches * 0.1) + (weight * 0.5) - (dislikes * 1)
+        """
         return (self.likes * 3) + (self.watches * 0.1) + (self.weight * 0.5) - (self.dislikes * 1)
 
     def get_short_text(self, max_length=100):
-        """Получить сокращенный текст цитаты"""
+        """Получить сокращенный текст цитаты
+
+        Args:
+            max_length (int): максимальная длина текста. По умолчанию 100.
+
+        Returns:
+            str: исходный текст, если он не длиннее `max_length`,
+                 иначе — обрезанный текст с «...».
+        """
         if len(self.quote_text) <= max_length:
             return self.quote_text
         return self.quote_text[:max_length-3] + "..."

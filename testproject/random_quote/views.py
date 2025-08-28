@@ -1,22 +1,49 @@
-import random
-from collections import Counter
+"""Views для приложения цитат.
 
-from django.db.models import F
+Содержит:
+- форму создания цитаты (CBV),
+- показ случайной цитаты с взвешенным выбором и учётом просмотров,
+- обработчики лайков/дизлайков,
+- топ-10 по лайкам,
+- дашборд со сводной статистикой и аналитикой по типам источников.
+"""
+
+import random
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
 from django.views.decorators.http import require_POST
-from django.db.models import Avg, Sum, Count
+from django.db.models import F, Count, Sum, Avg, Case, When, Value, CharField
+from django.db.models.functions import Coalesce
 from .models import Quote
 from .forms import QuoteForm
 
 
 class QuoteCreateView(CreateView):
+    """
+    Форма создания новой цитаты.
+
+    Шаблон: ``quote_form.html``.
+    Форма: ``QuoteForm``.
+    После успешного сохранения — редирект на страницу случайной цитаты.
+    """
     template_name = "quote_form.html"
     form_class = QuoteForm
     success_url = reverse_lazy("random_quote")
 
+"""
+Показ случайной цитаты с учётом веса.
 
+Алгоритм:
+1) Загружаем все цитаты.
+2) Если пусто — возвращаем шаблон без цитаты.
+3) Если суммарный вес > 0, используем взвешенный выбор по полю ``weight``.
+   Иначе — равновероятный выбор.
+4) Инкрементируем счётчик ``watches`` через F-выражение и обновляем объект.
+Контекст шаблона:
+- ``quote``: выбранная цитата или ``None``.
+    """
 def random_quote_view(request):
     quotes = list(Quote.objects.all())
     if not quotes:
@@ -34,6 +61,18 @@ def random_quote_view(request):
     return render(request, "random.html", {"quote": chosen})
 
 
+"""
+Обработчик лайка для цитаты (POST).
+
+Действия:
+    - Увеличивает ``likes`` на 1.
+    - Повышает ``weight`` (но не выше 100).
+    - Сохраняет только изменённые поля.
+    - Редиректит на показ случайной цитаты.
+
+Args:
+    pk (int): первичный ключ цитаты.
+"""
 @require_POST
 def like_quote(request, pk: int):
     quote = get_object_or_404(Quote, pk=pk)
@@ -42,7 +81,18 @@ def like_quote(request, pk: int):
     quote.save(update_fields=['likes', 'weight'])
     return redirect(random_quote_view)
 
+"""
+Обработчик дизлайка для цитаты (POST).
 
+Действия:
+    - Увеличивает ``dislikes`` на 1.
+    - Понижает ``weight`` (но не ниже 0).
+    - Сохраняет только изменённые поля.
+    - Редиректит на показ случайной цитаты.
+
+Args:
+    pk (int): первичный ключ цитаты.
+"""
 @require_POST
 def dislike_quote(request, pk: int):
     quote = get_object_or_404(Quote, pk=pk)
@@ -53,16 +103,35 @@ def dislike_quote(request, pk: int):
 
 
 class Top10ByLikesView(ListView):
+    """
+    Список топ-10 цитат по лайкам.
+
+    Шаблон: ``top10.html``.
+    Имя контекста: ``quotes``.
+    Сортировка: по лайкам ↓, затем по весу ↓ и просмотрам ↓.
+    """
     model = Quote
     template_name = "top10.html"
     context_object_name = "quotes"
 
+    """Вернуть QuerySet из 10 самых «сильных» цитат по заданному порядку."""
     def get_queryset(self):
         return Quote.objects.order_by("-likes", "-weight", "-watches")[:10]
 
 
 def dashboard_view(request):
-    """Дашборд с общей статистикой"""
+    """
+    Дашборд с общей статистикой и аналитикой.
+
+    Считает агрегаты по всем цитатам и формирует срезы:
+        - ``stats``: суммарные просмотры/лайки/дизлайки, количество цитат и средний вес.
+        - ``source_stats``: группировка по типу источника (с человекочитаемой меткой),
+          количества цитат, лайков и просмотров (Coalesce -> 0 для None).
+        - ``top_sources``: топ-5 источников по сумме лайков.
+        - ``recent_quotes``: 5 последних добавленных цитат.
+
+    Рендерит шаблон ``dashboard.html`` с соответствующим контекстом.
+    """
     stats = {
         'total_quotes': Quote.objects.count(),
         'total_views': Quote.objects.aggregate(Sum('watches'))['watches__sum'] or 0,
@@ -71,20 +140,29 @@ def dashboard_view(request):
         'avg_weight': Quote.objects.aggregate(Avg('weight'))['weight__avg'] or 0,
     }
 
-    # Статистика по типам источников
-    source_stats = Quote.objects.values('source_type').annotate(
-        count=Count('quote_id'),
-        total_likes=Sum('likes'),
-        total_views=Sum('watches')
-    ).order_by('-count')
+    source_stats = (
+        Quote.objects.values('source_type')
+        .annotate(
+            source_type_label=Case(
+                When(source_type=Quote.MOVIE, then=Value('Фильм')),
+                When(source_type=Quote.BOOK, then=Value('Книга')),
+                When(source_type=Quote.SERIES, then=Value('Сериал')),
+                When(source_type=Quote.PEOPLE, then=Value('Известный человек')),
+                default=Value('Неизвестно'),
+                output_field=CharField(),
+            ),
+            count=Count('quote_id'),
+            total_likes=Coalesce(Sum('likes'), 0),
+            total_views=Coalesce(Sum('watches'), 0),
+        )
+        .order_by('-count')
+    )
 
-    # Топ источники
     top_sources = Quote.objects.values('source').annotate(
         count=Count('quote_id'),
         total_likes=Sum('likes')
     ).order_by('-total_likes')[:5]
 
-    # Последние добавленные цитаты
     recent_quotes = Quote.objects.order_by('-created_at')[:5]
 
     context = {
@@ -95,24 +173,3 @@ def dashboard_view(request):
     }
 
     return render(request, 'dashboard.html', context)
-
-def quotes_by_source_view(request, source_type=None):
-    """Просмотр цитат по типу источника"""
-    quotes = Quote.objects.all()
-
-    if source_type:
-        quotes = quotes.filter(source_type=source_type)
-        title = f"Цитаты из категории: {dict(Quote.SOURCE_CHOICES).get(source_type, source_type)}"
-    else:
-        title = "Все цитаты"
-
-    quotes = quotes.order_by('-likes', '-weight')
-
-    context = {
-        'quotes': quotes,
-        'title': title,
-        'source_type': source_type,
-        'source_choices': Quote.SOURCE_CHOICES,
-    }
-
-    return render(request, 'quotes_by_source.html', context)

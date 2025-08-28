@@ -4,18 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="398d4524-d5ad-4208-ac2e-e3454257db68" name="Changes" comment="feature: Лайки и дизлайки влияют на вес цитаты">
+    <list default="true" id="398d4524-d5ad-4208-ac2e-e3454257db68" name="Changes" comment="feature: Сделан дашборд с общей статистикой, статистикой по типу источников, топом источников по лайкам и последними добавлеными цитатами&#10;feature: Изменение стандартного вида админа на пользовательский&#10;fix: Изменение навигации&#10;fix: Изменение порядка подсчета веса и его добавления в бд&#10;fix: Дополнительные проверки в формах&#10;fix: Добавление дефолтных значений в модельке и валидация веса&#10;fix: Добавление индексов для полей&#10;fix: Добавление подсказок для полей">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testproject/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testproject/random_quote/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testproject/random_quote/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testproject/random_quote/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testproject/random_quote/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testproject/random_quote/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/templates/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testproject/random_quote/templates/quote_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/templates/quote_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testproject/random_quote/templates/random.html" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/templates/random.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testproject/random_quote/templates/top10.html" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/templates/top10.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testproject/random_quote/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testproject/random_quote/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/random_quote/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testproject/testproject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/testproject/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testproject/testproject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/testproject/testproject/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,13 +107,22 @@
       <option name="project" value="LOCAL" />
       <updated>1756199906173</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feature: Сделан дашборд с общей статистикой, статистикой по типу источников, топом источников по лайкам и последними добавлеными цитатами&#10;feature: Изменение стандартного вида админа на пользовательский&#10;fix: Изменение навигации&#10;fix: Изменение порядка подсчета веса и его добавления в бд&#10;fix: Дополнительные проверки в формах&#10;fix: Добавление дефолтных значений в модельке и валидация веса&#10;fix: Добавление индексов для полей&#10;fix: Добавление подсказок для полей">
+      <option name="closed" value="true" />
+      <created>1756212542833</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1756212542833</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feature: Добавление цитаты с валидацией по уникальности текста, по количеству цитат на один источник и неотрицательности веса &#10;feature: Отображение случайной цитаты с учетом веса&#10;feature: Возможность поставить лайк или дизлайк цитате&#10;feature: Отображение 10 самых популярных цитат&#10;feature: Счетчик просмотров&#10;feature: Добавление поля &quot;тип источника&quot;" />
     <MESSAGE value="fix: Изменение редиректа при лайке и дизлайке" />
     <MESSAGE value="feature: Лайки и дизлайки влияют на вес цитаты" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature: Лайки и дизлайки влияют на вес цитаты" />
+    <MESSAGE value="feature: Сделан дашборд с общей статистикой, статистикой по типу источников, топом источников по лайкам и последними добавлеными цитатами&#10;feature: Изменение стандартного вида админа на пользовательский&#10;fix: Изменение навигации&#10;fix: Изменение порядка подсчета веса и его добавления в бд&#10;fix: Дополнительные проверки в формах&#10;fix: Добавление дефолтных значений в модельке и валидация веса&#10;fix: Добавление индексов для полей&#10;fix: Добавление подсказок для полей" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature: Сделан дашборд с общей статистикой, статистикой по типу источников, топом источников по лайкам и последними добавлеными цитатами&#10;feature: Изменение стандартного вида админа на пользовательский&#10;fix: Изменение навигации&#10;fix: Изменение порядка подсчета веса и его добавления в бд&#10;fix: Дополнительные проверки в формах&#10;fix: Добавление дефолтных значений в модельке и валидация веса&#10;fix: Добавление индексов для полей&#10;fix: Добавление подсказок для полей" />
   </component>
 </project>

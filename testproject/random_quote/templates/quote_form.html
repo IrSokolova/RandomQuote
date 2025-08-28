@@ -2,12 +2,22 @@
 {% block title %}Добавить цитату{% endblock %}
 {% block content %}
 <h1>Добавить цитату</h1>
-<form method="post">
+{% if form.errors %}
+  <ul class="errorlist error-summary">
+    {# неполевые ошибки #}
+    {% for err in form.non_field_errors %}
+      <li>{{ err }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<form method="post" novalidate>
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Сохранить</button>
 </form>
-{% if form.errors %}
-  <pre style="color:red">{{ form.errors }}</pre>
-{% endif %}
+
+<style>
+  .errorlist { color: #ef4444; }
+</style>
 {% endblock %}
