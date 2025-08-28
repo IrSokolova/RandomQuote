@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <div align="center">
   <a href="https://github.com/IrSokolova/RandomQuote">
-    <img src="logo.png" alt="Logo" width="80" height="80">
+    <img src="лого.png" alt="Logo" width="80" height="80">
   </a>
 </div>
 
